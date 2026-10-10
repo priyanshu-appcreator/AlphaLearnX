@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Account - SmartAlphaX</title>
+
+    <meta name="description"
+          content="Request deletion of your SmartAlphaX account and associated personal data.">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#6750A4">
+
+    <style>
+        :root {
+            --primary: #6750A4;
+            --primary-dark: #4F378B;
+            --background: #F7F5FC;
+            --surface: #FFFFFF;
+            --text: #24212B;
+            --muted: #625D6B;
+            --border: #E4DFEE;
+            --danger: #B3261E;
+            --success: #146C43;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 16px;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .brand h1 {
+            font-size: 21px;
+            margin: 0;
+        }
+
+        .brand p {
+            color: var(--muted);
+            margin: 2px 0 0;
+            font-size: 13px;
+        }
+
+        main {
+            max-width: 760px;
+            margin: 35px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 5px 22px rgba(30, 20, 50, 0.04);
+            margin-bottom: 22px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FCE8E6;
+            color: var(--danger);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin: 15px 0 10px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-top: 24px;
+        }
+
+        p, li {
+            color: var(--muted);
+        }
+
+        ul {
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .warning {
+            background: #FFF4E5;
+            border-left: 4px solid #B26A00;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .warning p {
+            margin: 0;
+            color: #654400;
+        }
+
+        .info {
+            background: #F0EBFA;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #C9C3D4;
+            border-radius: 10px;
+            background: white;
+            color: var(--text);
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 1px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            color: var(--muted);
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: var(--danger);
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            display: none;
+            padding: 14px;
+            border-radius: 10px;
+            margin-top: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .message.error {
+            display: block;
+            background: #FCE8E6;
+            color: var(--danger);
+        }
+
+        .message.success {
+            display: block;
+            background: #E6F4EA;
+            color: var(--success);
+        }
+
+        .small {
+            font-size: 13px;
+        }
+
+        a {
+            color: var(--primary-dark);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 16px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        footer a {
+            margin: 0 8px;
+        }
+
+        @media (max-width: 500px) {
+            main {
+                margin-top: 20px;
+            }
+
+            .card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo" aria-hidden="true">S</div>
+
+        <div class="brand">
+            <h1>SmartAlphaX</h1>
+            <p>Learning App · Account Management</p>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <section class="card">
+        <span class="badge">ACCOUNT DELETION</span>
+
+        <h2>Delete Your SmartAlphaX Account</h2>
+
+        <p>
+            You can use this page to request deletion of your
+            SmartAlphaX account and associated personal data.
+            You do not need to reinstall the app to access this page.
+        </p>
+
+        <div class="warning">
+            <p>
+                <strong>Important:</strong> Account deletion may be
+                permanent. You may lose your saved learning progress,
+                quiz results, profile information, and other
+                account-associated data.
+            </p>
+        </div>
+
+        <h3>What data may be deleted?</h3>
+
+        <ul>
+            <li>Your SmartAlphaX account and authentication profile.</li>
+            <li>Your name, email address, and account profile data.</li>
+            <li>Saved learning progress and quiz results associated with your account.</li>
+            <li>Account settings and other associated personal data.</li>
+            <li>Locally stored account-specific data, when the app can access the device.</li>
+        </ul>
+
+        <h3>What data may be retained?</h3>
+
+        <p>
+            Certain records may need to be retained where required by
+            applicable law or for legitimate security purposes.
+            Any retained data should be limited to what is necessary,
+            with the applicable retention period and reason explained.
+        </p>
+
+        <p class="small">
+            Shared educational content, such as lessons and general
+            question banks, may remain available because it is not
+            necessarily personal data belonging to an individual user.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Submit an Account Deletion Request</h2>
+
+        <p>
+            Complete the form below to prepare your deletion request.
+            Your identity must be verified before an account can be deleted.
+        </p>
+
+        <!--
+          BACKEND INTEGRATION REQUIRED
+
+          This form does not delete any data by itself.
+
+          Before enabling submissions, configure a secure HTTPS backend
+          that verifies account ownership and executes the deletion
+          workflow for Firebase Authentication, Realtime Database,
+          and other applicable data stores.
+
+          Never place Firebase Admin credentials in this page.
+        -->
+
+        <form id="deletionForm">
+
+            <div class="form-group">
+                <label for="email">Account email address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    maxlength="254"
+                    placeholder="Enter the email associated with your account"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reason">
+                    Reason for deletion (optional)
+                </label>
+
+                <select id="reason" name="reason">
+                    <option value="">Prefer not to say</option>
+                    <option value="no_longer_needed">I no longer need the app</option>
+                    <option value="privacy">Privacy concerns</option>
+                    <option value="technical">Technical issues</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="details">
+                    Additional information (optional)
+                </label>
+
+                <textarea
+                    id="details"
+                    name="details"
+                    maxlength="500"
+                    placeholder="Do not enter your password or verification codes."
+                ></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <input
+                    type="checkbox"
+                    id="confirm"
+                    required
+                >
+
+                <label for="confirm">
+                    I understand that my account and associated personal
+                    data may be permanently deleted after my identity
+                    is verified. I understand that this form does not
+                    itself complete the deletion.
+                </label>
+            </div>
+
+            <button type="submit" id="submitButton">
+                Request Account Deletion
+            </button>
+
+            <div
+                id="formMessage"
+                class="message"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+            <p class="small">
+                Never enter your password, OTP, recovery code, or other
+                authentication secrets into this form.
+            </p>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>How does deletion work?</h2>
+
+        <ol>
+            <li>Submit a deletion request through the configured secure process.</li>
+            <li>Verify that you own the account.</li>
+            <li>The deletion system processes your account and associated data.</li>
+            <li>You receive a confirmation when deletion is completed.</li>
+        </ol>
+
+        <div class="info">
+            <strong>Processing time</strong>
+            <p>
+                The actual processing period must be specified by the
+                app developer after the backend and deletion workflow
+                have been configured.
+            </p>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Need Help?</h2>
+
+        <p>
+            For account deletion questions, contact the app's support team.
+        </p>
+
+        <p>
+            <strong>Support email:</strong>
+            <a href="mailto:android7392@protonmail.com">
+                android7392@protonmail.com
+            </a>
+        </p>
+
+        <p class="small">
+            Email support is an alternative contact method.
+            Sending an email does not automatically delete your account.
+        </p>
+
+        <p>
+            <a href="https://priyanshu-appcreator.github.io/SmartAlphaX-/privacy-policy">
+                Privacy Policy
+            </a>
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>© <span id="year"></span> SmartAlphaX — Learning App</p>
+
+    <p>
+        <a href="https://priyanshu-appcreator.github.io/SmartAlphaX-/privacy-policy">
+            Privacy Policy
+        </a>
+    </p>
+</footer>
+
+<script>
+"use strict";
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+const form = document.getElementById("deletionForm");
+const message = document.getElementById("formMessage");
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const reason = document.getElementById("reason").value;
+    const details = document.getElementById("details").value.trim();
+    const confirmed = document.getElementById("confirm").checked;
+
+    if (!email || !confirmed) {
+        message.className = "message error";
+        message.textContent =
+            "Please enter your email and confirm the deletion request.";
+        return;
+    }
+
+    const subject = "SmartAlphaX Account Deletion Request";
+
+    const body = `Hello SmartAlphaX Support,
+
+I request deletion of my SmartAlphaX account and associated personal data.
+
+Account email: ${email}
+
+Reason: ${reason || "Not provided"}
+
+Additional information: ${details || "None"}
+
+Please verify my account ownership and confirm when deletion is complete.
+
+Thank you.`;
+
+    const gmailURL =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        "&to=" + encodeURIComponent("android7392@protonmail.com") +
+        "&su=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+    window.location.href = gmailURL;
+});
+</script>
+<script>
+
+    "use strict";
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+    const form = document.getElementById("deletionForm");
+    const message = document.getElementById("formMessage");
+    const submitButton = document.getElementById("submitButton");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        message.className = "message error";
+        message.textContent =
+            "Online account deletion is not configured yet. " +
+            "No account or data has been deleted. " +
+            "Please contact android7392@protonmail.com for assistance.";
+
+        message.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+    });
+</script>
+
+</body>
+</html>
